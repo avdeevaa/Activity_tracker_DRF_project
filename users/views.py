@@ -1,11 +1,24 @@
-from django.views.generic import CreateView
+from rest_framework import generics
+from rest_framework.response import Response
+from rest_framework import status
+from .models import User
+from .serializers import UserSerializer, CustomTokenObtainPairSerializer
+from rest_framework_simplejwt.views import TokenObtainPairView
 
-from users.models import User
+
+class RegisterAPIView(generics.CreateAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
+    def post(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        if serializer.is_valid():
+            self.perform_create(serializer)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-class RegisterView(CreateView):
-    model = User
-
-    # def get_success_url(self):
-    #     return reverse('users:login')
+class CustomTokenObtainPairView(TokenObtainPairView):
+    """это нужно для логина"""
+    serializer_class = CustomTokenObtainPairSerializer
 
