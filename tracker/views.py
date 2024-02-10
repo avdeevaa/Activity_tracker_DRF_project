@@ -11,22 +11,24 @@ from tracker.serializers import ActivitySerializer
 class ActivityCreateAPIview(generics.CreateAPIView):
     """Создаем новую привычку"""
     serializer_class = ActivitySerializer
-    # permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated]
 
 
 class ActivityListAPIview(generics.ListAPIView):
-    """Список всех привычек"""
+    """Список всех привычек, доступно для всех пользователей"""
     serializer_class = ActivitySerializer
     queryset = Activity.objects.all()
-    # permission_classes = [IsAuthenticated, IsAdminUser]
     pagination_class = ActivityPagination
+
+    def get_queryset(self):
+        return Activity.objects.filter(public=True)
 
 
 class ActivityRetrieveAPIview(generics.RetrieveAPIView):
     """Смотрим, получаем одну привычку"""
     serializer_class = ActivitySerializer
     queryset = Activity.objects.all()
-    # permission_classes = [IsAuthenticated, IsAdminUser, IsOwner]
+    permission_classes = [IsAuthenticated]
     pagination_class = ActivityPagination
 
 
@@ -34,13 +36,13 @@ class ActivityUpdateAPIview(generics.UpdateAPIView):
     """Меняем привычку"""
     serializer_class = ActivitySerializer
     queryset = Activity.objects.all()
-    # permission_classes = [IsAuthenticated, IsOwner]
+    permission_classes = [IsAuthenticated]
 
 
 class ActivityDestroyAPIview(generics.DestroyAPIView):
     """Удаляем привычку"""
     queryset = Activity.objects.all()
-    # permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated]
 
 
 class UserActivityListAPIView(generics.ListAPIView):
