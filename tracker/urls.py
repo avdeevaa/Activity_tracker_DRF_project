@@ -2,7 +2,7 @@ from django.urls import path
 
 from tracker.apps import TrackerConfig
 from tracker.views import ActivityCreateAPIview, ActivityListAPIview, ActivityUpdateAPIview, ActivityRetrieveAPIview, \
-    ActivityDestroyAPIview
+    ActivityDestroyAPIview, UserActivityListAPIView
 
 app_name = TrackerConfig.name
 
@@ -13,4 +13,6 @@ urlpatterns = [
     path('activity/<int:pk>/', ActivityRetrieveAPIview.as_view(), name='get_one_activity'),
     path('activity/update/<int:pk>/', ActivityUpdateAPIview.as_view(), name='update_activity'),
     path('activity/delete/<int:pk>/', ActivityDestroyAPIview.as_view(), name='delete_activity'),
+
+    path('my-activities/', UserActivityListAPIView.as_view(), name='user_activities'),  # только мои привычки
 ]
