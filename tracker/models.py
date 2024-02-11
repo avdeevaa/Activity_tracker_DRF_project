@@ -26,7 +26,7 @@ class Activity(models.Model):
     is_useful_action = models.BooleanField(default=False, verbose_name="Связанная, полезная привычка", null=True, blank=True)
 
     periodicity = models.CharField(verbose_name="Периодичность", choices=PERIODS, default="daily")
-    reward = models.CharField(max_length=500, verbose_name='Вознаграждение')
+    reward = models.CharField(max_length=500, verbose_name='Вознаграждение', null=True, blank=True)
     activity_time = models.PositiveIntegerField(verbose_name='Время на выполнение')
     public = models.BooleanField(verbose_name='Признак публичности', default=False)
 
