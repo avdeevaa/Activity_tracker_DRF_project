@@ -1,8 +1,8 @@
 from rest_framework import serializers
 
 from tracker.models import Activity
-from tracker.validators import ActivityTimeValidator, NoEnjoyableActionRewardValidator, \
-    NoEnjoyableUsefulActionValidator #PeriodsValidator
+from tracker.validators import ActivityTimeValidator, NoEnjoyableActionRewardValidator, PeriodsValidator
+    # NoEnjoyableUsefulActionValidator
 
 
 class ActivitySerializer(serializers.ModelSerializer):  # Generics
@@ -13,6 +13,6 @@ class ActivitySerializer(serializers.ModelSerializer):  # Generics
         validators = [
             ActivityTimeValidator(field='activity_time'),  # great, it works!
             NoEnjoyableActionRewardValidator(field1='is_enjoyable_action', field2='reward'),
-            NoEnjoyableUsefulActionValidator(field1='is_enjoyable_action', field2='is_useful_action'),
-            # PeriodsValidator(field1='periodicity')
+            # NoEnjoyableUsefulActionValidator(field1='is_enjoyable_action', field2='is_useful_action'),
+            PeriodsValidator(field1='periodicity')
         ]
