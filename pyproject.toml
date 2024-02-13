@@ -21,6 +21,7 @@ celery = "^5.3.6"
 redis = "^5.0.1"
 eventlet = "^0.35.1"
 django-celery-beat = "^2.1.0"
+django-cors-headers = "^4.3.1"
 
 
 [build-system]
