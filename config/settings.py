@@ -159,8 +159,10 @@ REST_FRAMEWORK = {
     ]
 }
 
-# CELERY_BROKER_URL = "redis://127.0.0.1:6379/0"
-# CELERY_RESULT_BACKEND = "redis://127.0.0.1:6379/0"
+CELERY_BROKER_URL = "redis://127.0.0.1:6379/0"
+CELERY_RESULT_BACKEND = "redis://127.0.0.1:6379/0"
+
+# DJANGO_CELERY_BEAT_TZ_AWARE=False
 
 EMAIL_HOST = 'smtp.yandex.ru'
 EMAIL_PORT = 465
@@ -169,13 +171,13 @@ EMAIL_HOST_PASSWORD = 'AsTSNVv7pun9'
 EMAIL_USE_SSL = True
 
 
-# Настройки для Celery
-# CELERY_BEAT_SCHEDULE = {
-#     'check_last_login': {
-#         'task': 'school.tasks.check_last_login',  # Путь к задаче
-#         'schedule': datetime.timedelta(days=1),  # Расписание выполнения задачи (например, каждые 1 раз в день)
-#     },
-# }
+#  Настройки для Celery - у нас фоновая задача
+CELERY_BEAT_SCHEDULE = {
+    'check_last_login': {
+        'task': 'tracker.tasks.tg_send_message',  # Путь к задаче
+        'schedule': datetime.timedelta(days=1),  # Расписание выполнения задачи ( 1 раз в день)
+    },
+}
 
 # Настройки CORS
 CORS_ALLOWED_ORIGINS = [

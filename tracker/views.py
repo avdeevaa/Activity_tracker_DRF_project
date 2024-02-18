@@ -28,7 +28,7 @@ class ActivityRetrieveAPIview(generics.RetrieveAPIView):
     """Смотрим, получаем одну привычку"""
     serializer_class = ActivitySerializer
     queryset = Activity.objects.all()
-    permission_classes = [IsAuthenticated]
+    # permission_classes = [IsAuthenticated]
     pagination_class = ActivityPagination
 
 
