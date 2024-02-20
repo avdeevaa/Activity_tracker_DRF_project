@@ -25,16 +25,17 @@ class NoEnjoyableActionRewardValidator:
             raise ValidationError('У приятной привычки не может быть вознаграждения')
 
 
-# class NoEnjoyableUsefulActionValidator:
-#     """У приятной привычки не может быть связанной привычки"""
-#
-#     def __init__(self, field1, field2):
-#         self.field1 = field1
-#         self.field2 = field2
-#
-#     def __call__(self, value):
-#         if self.field1 == True and self.field2 == True:  # not "is" nor "=="
-#             raise ValidationError('У приятной привычки не может быть связанной (полезной) привычки.')
+class NoEnjoyableUsefulActionValidator:
+    """У приятной привычки не может быть связанной привычки"""
+
+    def __init__(self, field1, field2):
+        self.field1 = field1
+        self.field2 = field2
+
+    def __call__(self, value):
+        if self.field1 == True and self.field2 == True:  # not "is" nor "=="
+            raise ValidationError('У приятной привычки не может быть связанной (полезной) привычки.')
+
 
 class PeriodsValidator:
     """Нельзя выполнять привычку реже, чем 1 раз в 7 дней."""
