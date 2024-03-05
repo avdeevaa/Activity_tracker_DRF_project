@@ -96,6 +96,9 @@ DATABASES = {
         'NAME': os.getenv('DB_NAME'), # Название БД
         'USER': 'postgres', # Пользователь для подключения
         'PASSWORD': os.getenv('DB_PASSWORD'), # Пароль для этого пользователя
+        'HOST': 'localhost',
+        # 'PORT': '5432'
+        'PORT': 'db',
     }
 }
 
